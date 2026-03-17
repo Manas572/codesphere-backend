@@ -5,7 +5,6 @@ import io
 class StepLimitExceeded(Exception):
     pass
 
-
 class InputGenerator:
     def __init__(self, data):
         self.tokens = iter(data.split())
@@ -66,7 +65,7 @@ class TraceLogger(bdb.Bdb):
 
 def run_and_trace(code_string, custom_input=""):
     logger = TraceLogger()
-    
+
     custom_input_func = InputGenerator(custom_input)
     
     safe_builtins = {
