@@ -132,5 +132,6 @@ CODEFORCES_USER_RATING = os.getenv("CODEFORCES_USER_RATING")
 
 
 CORS_ALLOWED_ORIGINS = [
+    "https://codesphere-murex.vercel.app",
     "http://localhost:5173",
 ]
