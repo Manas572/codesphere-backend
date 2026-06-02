@@ -12,4 +12,5 @@ urlpatterns = [
     path('info/', views.Han.as_view()),
     path('sub/', views.Subinfo.as_view()),
     path('con/', views.Contestinfo.as_view()),
+    path('hi/', views.Hello.as_view()),
 ]

@@ -14,6 +14,12 @@ from rest_framework.generics import ListAPIView
 class ApiThrottle(UserRateThrottle):
     rate = "4/min"
 
+class Hello(APIView):
+    throttle_classes = [ApiThrottle]
+    def get(self,request):
+        return Response("done")
+
+
 class ExecuteCodeAPIView(APIView):
     throttle_classes = [ApiThrottle]
     def post(self, request):
