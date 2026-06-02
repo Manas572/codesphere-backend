@@ -104,6 +104,18 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# settings.py
+
+REST_FRAMEWORK = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.UserRateThrottle",
+        "rest_framework.throttling.AnonRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "1000/day",
+        "anon": "30/day",
+    }
+}
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

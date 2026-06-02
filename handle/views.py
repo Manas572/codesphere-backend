@@ -8,8 +8,14 @@ from .tracer import run_and_trace
 from collections import defaultdict
 import math
 from django.conf import settings
+from rest_framework.throttling import UserRateThrottle
+from rest_framework.generics import ListAPIView
+
+class ApiThrottle(UserRateThrottle):
+    rate = "4/min"
 
 class ExecuteCodeAPIView(APIView):
+    throttle_classes = [ApiThrottle]
     def post(self, request):
         serializer = CodeExecuteSerializer(data=request.data)
         if not serializer.is_valid():
@@ -39,6 +45,7 @@ class ExecuteCodeAPIView(APIView):
             )
 
 class FTC(APIView):
+    throttle_classes = [ApiThrottle]
     def post(self, request):
         serializer = TC(data=request.data)
         if not serializer.is_valid():
@@ -74,6 +81,7 @@ class FTC(APIView):
         
 
 class CB(APIView):
+    throttle_classes = [ApiThrottle]
     def post(self, request):
         serializer = ChatbotSerializer(data=request.data)
         if not serializer.is_valid():
@@ -118,6 +126,7 @@ class CB(APIView):
 
 
 class Visual(APIView):
+    throttle_classes = [ApiThrottle]
     def post(self, request):
         serializer = VisSer(data=request.data)
         if not serializer.is_valid():
@@ -142,6 +151,7 @@ class Visual(APIView):
 
 
 class Han(APIView):
+    throttle_classes = [ApiThrottle]
     def get(self, request):
         serializer = HanSer(data=request.query_params)
         if not serializer.is_valid():
@@ -240,6 +250,7 @@ def derive_stats(cleaned_data):
     }
 
 class Subinfo(APIView):
+    throttle_classes = [ApiThrottle]
     def get(self, request):
         serializer = HanSer(data=request.query_params)
         if not serializer.is_valid():
@@ -373,6 +384,7 @@ def derive_contest_analytics(contests):
 
 
 class Contestinfo(APIView):
+    throttle_classes = [ApiThrottle]
     def get(self,request):
         serializer=HanSer(data=request.query_params)
         if not serializer.is_valid():
